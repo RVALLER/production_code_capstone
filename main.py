@@ -1,3 +1,4 @@
+import enum
 from dataclasses import dataclass
 
 
@@ -11,40 +12,23 @@ def state_check(state, accepted_states):
     return accepted
 
 
-def get_rate(state):
-    if state == "MA" or state == "MASSACHUSETTS":
-        tax_rate = 0.0625
-        return tax_rate
-    elif state == "NH" or state == "NEW HAMPSHIRE":
-        tax_rate = 0
-        return tax_rate
-    elif state == "ME" or state == "MAINE":
-        tax_rate = 0.550
-        return tax_rate
+@dataclass
+class Category(enum.Enum):
+    wic = 0
+    clothing = 1
+    other = 2
 
 
 @dataclass
-class wic_items:
+class item:
     name: str
     price: float
     quantity: int
+    category: Category
 
 
-@dataclass
-class other_items:
-    name: str
-    price: float
-    quantity: int
-
-
-@dataclass
-class clothing_items:
-    name: str
-    price: float
-    quantity: int
-
-
-def total_calculator(shopping_cart, state):
+def total_calculator(shopping_cart, a_state):
+    print("hold me")
 
 
 def main():
@@ -52,6 +36,15 @@ def main():
     state_ = input("Enter the state in which you reside: ")
     while not (state_check(state_.upper(), state_list)):
         state_ = input("Enter the state in which you reside: ")
+    if "ma" in state_:
+        state_ = "Massachusetts"
+    if "me" in state_:
+        state_ = "Maine"
+    if "nh" in state_:
+        state_ = "New Hampshire"
+
+    cookie = item("Oreo", 3.99, 2, Category.wic)
+    print(cookie.category)
 
 
 main()
