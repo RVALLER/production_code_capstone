@@ -43,8 +43,11 @@ def main():
     if "nh" in state_:
         state_ = "New Hampshire"
 
-    cookie = item("Oreo", 3.99, 2, Category.wic)
-    print(cookie.category)
+    shopping_cart = []
+    cookie = item("Oreo", 3.99, 2, Category.clothing)
+    shopping_cart.append(cookie)
+
+
 
 
 main()
