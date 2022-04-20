@@ -12,24 +12,17 @@ def state_check(state, accepted_states):
 
 
 @dataclass
-class Category(enum.Enum):
-    wic = 0
-    clothing = 1
-    other = 2
-
-
-@dataclass
 class item:
     name: str
     price: float
     quantity: int
-    category: Category
+    category: str
 
 
 def get_taxes(state_):
-    if state_ == "Massachusetts":
+    if state_.upper() == "MA":
         tax_rate = 0.0625
-    elif state_ == "Maine":
+    elif state_.upper() == "ME":
         tax_rate = 0.0550
     else:
         tax_rate = 0
@@ -39,26 +32,24 @@ def get_taxes(state_):
 def calc_item_cost(state_, item_):
     cat = item_.category
     tax_rate = get_taxes(state_)
-    sub_total = 0
+    total = 0
+    if cat == 'other':
+        price = item_.price
+        sub_total = price * item_.quantity
+        total = sub_total + (sub_total * tax_rate)
 
-    if cat == Category.other:
+    elif cat == 'wic':
+        total = item_.price * item_.quantity
+
+    elif cat == 'clothing':
         price = item_.price
-        total_price = price * item_.quantity + (price * tax_rate)
-        sub_total += round(total_price, 2)
-    elif cat == Category.wic:
-        price = item_.price
-        total_price = price * item_.quantity
-        sub_total += round(total_price, 2)
-    elif cat == Category.clothing:
-        price = item_.price
-        if state_ == "Massachusetts" and price >= 175:
-            total_price = price * item_.quantity + (price * tax_rate)
-            sub_total += round(total_price, 2)
+        if state_ == "MA" and price > 175.00:
+            sub_total = price * item_.quantity
+            total = sub_total + (price * tax_rate)
         else:
-            total_price = price * item_.quantity
-            sub_total += round(total_price, 2)
+            total = price * item_.quantity
 
-    return sub_total
+    return total
 
 
 def total_calculator(shopping_cart, a_state):
@@ -72,27 +63,20 @@ def total_calculator(shopping_cart, a_state):
 
 
 def main():
-    state_list = ["MASSACHUSETTS", "MAINE", "NEW HAMPSHIRE", "MA", "ME", "NH"]
-    state_ = input("Enter the state in which you reside: ")
+    state_list = ["MA", "ME", "NH"]
+    state_ = input("Enter the state in which you reside (2 letter state code only) : ")
     while not (state_check(state_.upper(), state_list)):
         state_ = input("Enter the state in which you reside: ")
-    if "ma" == state_ or "massachusetts" == state_.lower():
-        state_ = "Massachusetts"
-    if "me" in state_ or "maine" in state_.lower():
-        state_ = "Maine"
-    if "nh" in state_.lower() or "new hampshire" == state_.lower():
-        state_ = "New Hampshire"
-
+    state_ = state_.upper()
     shopping_list = []
-    cookie = item("Oreo", 3.99, 1, Category.wic)
+    cookie = item("Oreo", 3.99, 1, "wic")
     shopping_list.append(cookie)
-    # shirt_1 = item("Suit", 200.0, 1, Category.clothing)
-    # shopping_list.append(shirt_1)
-    # pants_1 = item("Slacks", 15.99, 1, Category.clothing)
-    # shopping_list.append(pants_1)
-    # vacuum = item("Hoover", 49.99, 1, Category.other)
-    # shopping_list.append(vacuum)
-
+    shirt_1 = item("Suit", 200.0, 1, "clothing")
+    shopping_list.append(shirt_1)
+    pants_1 = item("Slacks", 15.99, 1, "clothing")
+    shopping_list.append(pants_1)
+    vacuum = item("Hoover", 49.99, 1, "other")
+    shopping_list.append(vacuum)
     print(total_calculator(shopping_list, state_))
 
 
