@@ -58,7 +58,7 @@ def total_calculator(shopping_cart, a_state):
         if item_.price > 0:
             grand_total += calc_item_cost(a_state, item_)
         else:
-            ValueError(f"The item {item_.name} has no associated cost. Refunds cannot be processed at this time. ")
+            return ValueError(f"The item {item_.name} has no associated cost. Refunds cannot be processed at this time. ")
     return round(grand_total, 2)
 
 
@@ -76,8 +76,11 @@ def main():
     pants_1 = item("Slacks", 15.99, 1, "clothing")
     shopping_list.append(pants_1)
     vacuum = item("Hoover", 49.99, 1, "other")
-    shopping_list.append(vacuum)
+    # shopping_list.append(vacuum)
+    # returns_bin = item("refund", -900, 1, "other")
+    # shopping_list.append(returns_bin)
     print(total_calculator(shopping_list, state_))
 
 
-main()
+if __name__ == '__main__':
+    main()
