@@ -1,8 +1,5 @@
-import unittest
 from dataclasses import dataclass
-
 import pytest
-
 from main import get_taxes, calc_item_cost, total_calculator
 
 
@@ -41,8 +38,7 @@ def test_tax_getter():
 
 def test_item_pricer():
     assert calc_item_cost(state1, cloth) == 212.5
-    # with pytest.raises(ValueError):
-    #     calc_item_cost(state2, other)
+
 
 
 def test_total():
