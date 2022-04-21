@@ -57,7 +57,7 @@ def total_calculator(shopping_cart, a_state):
         if item_.price > 0:
             grand_total += calc_item_cost(a_state, item_)
         else:
-            raise ValueError(f"The item {item_.name} has no associated cost. Refunds cannot be processed at this time. ")
+            print(f"The item {item_.name} has no associated cost. Refunds cannot be processed at this time. ")
     return round(grand_total, 2)
 
 
