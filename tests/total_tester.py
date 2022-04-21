@@ -40,8 +40,6 @@ def test_item_pricer():
     assert calc_item_cost(state1, cloth) == 212.5
 
 
-
 def test_total():
     with pytest.raises(ValueError):
         total_calculator(test_cart_2, state1)
-

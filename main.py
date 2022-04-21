@@ -1,4 +1,3 @@
-import enum
 from dataclasses import dataclass
 
 
@@ -76,9 +75,6 @@ def main():
     pants_1 = item("Slacks", 15.99, 1, "clothing")
     shopping_list.append(pants_1)
     vacuum = item("Hoover", 49.99, 1, "other")
-    # shopping_list.append(vacuum)
-    # returns_bin = item("refund", -900, 1, "other")
-    # shopping_list.append(returns_bin)
     print(total_calculator(shopping_list, state_))
 
 
