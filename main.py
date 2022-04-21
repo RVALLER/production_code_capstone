@@ -72,10 +72,10 @@ def main():
     shopping_list.append(cookie)
     shirt_1 = item("Suit", 200.0, 1, "clothing")
     shopping_list.append(shirt_1)
-    pants_1 = item("Slacks", 15.99, 1, "clothing")
+    pants_1 = item("Slacks", 15.99, 8, "clothing")
     shopping_list.append(pants_1)
     vacuum = item("Hoover", 49.99, 1, "other")
-    print(total_calculator(shopping_list, state_))
+    print("Your total is: $", total_calculator(shopping_list, state_))
 
 
 if __name__ == '__main__':
