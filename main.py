@@ -70,7 +70,7 @@ def main():
     shopping_list = []
     cookie = item("Oreo", 3.99, 1, "wic")
     shopping_list.append(cookie)
-    shirt_1 = item("Suit", 177.0, 1, "clothing")
+    shirt_1 = item("Suit", 200.0, 1, "clothing")
     shopping_list.append(shirt_1)
     pants_1 = item("Slacks", 15.99, 8, "clothing")
     shopping_list.append(pants_1)
